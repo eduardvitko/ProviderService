@@ -3,15 +3,29 @@ package com.providerservice.mapper;
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
 import com.providerservice.model.CustomerEntity;
-import com.providerservice.model.Role;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
-
-import static com.providerservice.model.Role.CLIENT;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 @Service
 public class CustomerMapper {
+
+    public Function<CustomerEntity, CustomerDto> CustomerToDto = this::convertToDto;
+    public Function<CustomerDto, CustomerEntity> CustomerToEntity = this::convertToEntity;
+
+    public <A, R> Set<R> collectionToSet(Collection<A> collection, Function<A, R> mapper) {
+        return collection.stream().map(mapper).collect(Collectors.toSet());
+    }
+
+    public <A, R> List<R> collectionToList(Collection<A> collection, Function<A, R> mapper) {
+        return collection.stream().map(mapper).collect(Collectors.toList());
+    }
+
     public CustomerEntity convertToEntity(CustomerDto customerDto){
         CustomerEntity customerEntity = new CustomerEntity();
         customerEntity.setId(customerDto.getId());
@@ -51,7 +65,7 @@ public class CustomerMapper {
         customerEntity.setPassword(customerRequestDto.getPassword());
         customerEntity.setEmail(customerRequestDto.getEmail());
         customerEntity.setActive(true);
-        customerEntity.setRole(CLIENT);
+        customerEntity.setRole("CLIENT");
         customerEntity.setCreated(LocalDateTime.now());
         customerEntity.setUpdated(LocalDateTime.now());
         customerEntity.setBalance(0);

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -23,15 +24,26 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto registration(CustomerRequestDto customerRequestDto) {
         CustomerEntity customerEntity = customerMapper.toCustomerEntity(customerRequestDto);
         CustomerEntity customerEntity1 = customerRepository.save(customerEntity);
-        customerEntity1.setRole(Role.CLIENT);
-        CustomerEntity customerEntity2 = customerRepository.save(customerEntity1);
-        return customerMapper.convertToDto(customerEntity2);
+        return customerMapper.convertToDto(customerEntity1);
 
     }
 
     @Override
-    public boolean delete(int id) {
-        return customerRepository.deleteById(id);
+    public void delete(Integer id) {customerRepository.deleteCustomerById(id);}
+
+    @Override
+    public CustomerDto findCustomerByPhoneNumber(String phoneNumber) {
+        return customerMapper.convertToDto(customerRepository.findCustomerEntitiesByPhone(phoneNumber));
+    }
+
+    @Override
+    public CustomerDto findCustomerByID(Integer id) {
+        return customerMapper.convertToDto(customerRepository.findCustomerById(id));
+    }
+
+    @Override
+    public List<CustomerDto> findAllCustomers() {
+        return customerMapper.collectionToList(customerRepository.findAllCustomers(),customerMapper.CustomerToDto) ;
     }
 
     @Override

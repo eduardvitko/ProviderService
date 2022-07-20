@@ -30,7 +30,7 @@ public class CustomerEntity {
     @Column
     private boolean isActive;
     @Column
-    private Role role;
+    private String role;
     @Column
     private LocalDateTime created;
     @Column
