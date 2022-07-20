@@ -8,14 +8,14 @@ import java.util.List;
 
 @Service
 public interface CustomerService {
-   CustomerDto registration (CustomerRequestDto customerRequestDto);
+    CustomerDto registration(CustomerRequestDto customerRequestDto);
 
- void delete(Integer id);
+    void delete(Integer id);
 
- CustomerDto findCustomerByPhoneNumber(String phoneNumber);
+    CustomerDto findCustomerByPhoneNumber(String phoneNumber);
 
- CustomerDto findCustomerByID(Integer id);
+    CustomerDto findCustomerByID(Integer id);
 
- List<CustomerDto> findAllCustomers();
+    List<CustomerDto> findAllCustomers();
 
 }

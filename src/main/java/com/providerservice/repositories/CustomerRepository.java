@@ -9,11 +9,11 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
 
-   void deleteCustomerById(Integer id);
+   void deleteById(Integer id);
 
    CustomerEntity findCustomerEntitiesByPhone(String phone);
 
    CustomerEntity findCustomerById(Integer id);
 
-   List<CustomerEntity> findAllCustomers();
+   List<CustomerEntity> findAll();
 }

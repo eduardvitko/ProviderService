@@ -4,10 +4,8 @@ import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
 import com.providerservice.mapper.CustomerMapper;
 import com.providerservice.model.CustomerEntity;
-import com.providerservice.model.Role;
 import com.providerservice.repositories.CustomerRepository;
 import com.providerservice.services.CustomerService;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void delete(Integer id) {customerRepository.deleteCustomerById(id);}
+    public void delete(Integer id) {customerRepository.deleteById(id);}
 
     @Override
     public CustomerDto findCustomerByPhoneNumber(String phoneNumber) {
@@ -43,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDto> findAllCustomers() {
-        return customerMapper.collectionToList(customerRepository.findAllCustomers(),customerMapper.CustomerToDto) ;
+        return customerMapper.collectionToList(customerRepository.findAll(),customerMapper.CustomerToDto) ;
     }
 
     @Override

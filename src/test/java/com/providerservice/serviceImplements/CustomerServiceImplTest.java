@@ -21,21 +21,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class CustomerServiceImplTest {
     @Resource
     private CustomerServiceImpl customerService;
-    @Resource
-    private CustomerMapper customerMapper;
+
 
 
     @Test
     void registration() {
         CustomerRequestDto customerRequestDto = new CustomerRequestDto();
         customerRequestDto.setFirstName("Victor");
-        customerRequestDto.setLastName("Kotov");
+        customerRequestDto.setLastName("Galko");
         customerRequestDto.setPhone("+380632231255");
         customerRequestDto.setPassword("25031952");
         customerRequestDto.setEmail("d@gmail.com");
 
         CustomerDto customerDto1 = customerService.registration(customerRequestDto);
-        System.out.println(customerDto1);
 
         assertEquals(1, 1);
         assertNotNull(customerDto1);
@@ -44,7 +42,7 @@ class CustomerServiceImplTest {
 
     @Test
     void deleteCustomerPositiveTest() {
-        Integer id = 16;
+        Integer id = 17;
         customerService.delete(id);
         assertEquals(true, true);
     }
@@ -64,7 +62,7 @@ class CustomerServiceImplTest {
     @Test
     void findAllCustomers(){
         List<CustomerDto> customerDtoList = customerService.findAllCustomers();
-        int size = customerDtoList.size();
+        Integer size = customerDtoList.size();
         assertNotNull(customerDtoList);
         assertEquals(5,5);
     }
