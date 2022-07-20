@@ -25,7 +25,7 @@ class CustomerServiceImplTest {
 
 
     @Test
-    void registration() {
+    void registrationPositiveTest() {
         CustomerRequestDto customerRequestDto = new CustomerRequestDto();
         customerRequestDto.setFirstName("Victor");
         customerRequestDto.setLastName("Galko");
@@ -33,18 +33,23 @@ class CustomerServiceImplTest {
         customerRequestDto.setPassword("25031952");
         customerRequestDto.setEmail("d@gmail.com");
 
-        CustomerDto customerDto1 = customerService.registration(customerRequestDto);
+        CustomerDto customerDto = customerService.registration(customerRequestDto);
+        Integer id = customerService.findCustomerByPhoneNumber("+380632231255").getId();
 
         assertEquals(1, 1);
-        assertNotNull(customerDto1);
+        assertNotNull(customerDto);
+
+        customerService.delete(id);
 
     }
 
     @Test
     void deleteCustomerPositiveTest() {
-        Integer id = 17;
+        CustomerRequestDto customerRequestDto = new CustomerRequestDto("Ivan","Budko","+380995214036","00264567","budko@gmail.com");
+        CustomerDto customerDto = customerService.registration(customerRequestDto);
+        Integer id = customerService.findCustomerByPhoneNumber("+380995214036").getId();
         customerService.delete(id);
-        assertEquals(true, true);
+
     }
 
     @Test
@@ -60,12 +65,13 @@ class CustomerServiceImplTest {
         assertNotNull(customerDto);
     }
     @Test
-    void findAllCustomers(){
+    void findAllCustomersPositiveTest(){
         List<CustomerDto> customerDtoList = customerService.findAllCustomers();
         Integer size = customerDtoList.size();
         assertNotNull(customerDtoList);
-        assertEquals(5,5);
+        assertEquals(5,size);
     }
+
 
 
 }

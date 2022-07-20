@@ -4,6 +4,7 @@ import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service
