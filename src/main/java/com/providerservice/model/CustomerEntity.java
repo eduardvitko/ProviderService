@@ -12,16 +12,21 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 @Entity
-@Table(name = "users")
-public class UserEntity {
+@Table(name = "customers")
+public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column(unique = false, nullable = false, updatable = false)
+    private String firstName;
+    @Column(unique = false, nullable = false, updatable = false)
+    private String lastName;
     @Column(unique = true, nullable = false, updatable = false)
     private String phone;
     @Column(unique = true, nullable = false, updatable = false)
     private String password;
+    @Column(unique = true, nullable = false, updatable = false)
+    private String email;
     @Column
     private boolean isActive;
     @Column
@@ -30,6 +35,6 @@ public class UserEntity {
     private LocalDateTime created;
     @Column
     private LocalDateTime updated;
-
-
+    @Column
+    private int balance;
 }
