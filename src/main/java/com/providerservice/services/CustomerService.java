@@ -19,4 +19,6 @@ public interface CustomerService {
 
     List<CustomerDto> findAllCustomers();
 
+   // CustomerDto updateProfile(CustomerDto customerDto);
+
 }

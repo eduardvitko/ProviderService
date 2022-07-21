@@ -16,4 +16,6 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
    CustomerEntity findCustomerById(Integer id);
 
    List<CustomerEntity> findAll();
+
+  // CustomerEntity updateCustomer(CustomerEntity customerEntity);
 }

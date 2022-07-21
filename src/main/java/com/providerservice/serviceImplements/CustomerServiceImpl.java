@@ -2,10 +2,12 @@ package com.providerservice.serviceImplements;
 
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
+import com.providerservice.exceptions.CustomerException;
 import com.providerservice.mapper.CustomerMapper;
 import com.providerservice.model.CustomerEntity;
 import com.providerservice.repositories.CustomerRepository;
 import com.providerservice.services.CustomerService;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,8 +20,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Resource
     private CustomerRepository customerRepository;
 
+
     @Override
     public CustomerDto registration(CustomerRequestDto customerRequestDto) {
+        if(customerRequestDto.getPhone()==null || customerRequestDto.getPassword()==null||customerRequestDto.getEmail()==null){
+            throw new RuntimeException("Value phone is not be empty");
+        }
         CustomerEntity customerEntity = customerMapper.toCustomerEntity(customerRequestDto);
         CustomerEntity customerEntity1 = customerRepository.save(customerEntity);
         return customerMapper.convertToDto(customerEntity1);
@@ -42,6 +48,12 @@ public class CustomerServiceImpl implements CustomerService {
     public List<CustomerDto> findAllCustomers() {
         return customerMapper.collectionToList(customerRepository.findAll(),customerMapper.CustomerToDto) ;
     }
+
+//    @Override
+//    public CustomerDto updateProfile(CustomerDto customerDto) {
+//        CustomerEntity customerEntity = customerMapper.convertToEntity(customerDto);
+//        return customerMapper.convertToDto(customerRepository.updateCustomer(customerEntity));
+//    }
 
     @Override
     public int hashCode() {
