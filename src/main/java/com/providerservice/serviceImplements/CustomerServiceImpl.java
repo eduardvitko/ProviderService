@@ -36,7 +36,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto findCustomerByPhoneNumber(String phoneNumber) {
-        return customerMapper.convertToDto(customerRepository.findCustomerEntitiesByPhone(phoneNumber));
+        CustomerEntity customerEntity= customerRepository.findCustomerEntitiesByPhone(phoneNumber);
+        return customerMapper.convertToDto(customerEntity);
     }
 
     @Override

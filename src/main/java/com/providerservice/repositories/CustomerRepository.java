@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
 
    void deleteById(Integer id);
@@ -17,5 +17,5 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
 
    List<CustomerEntity> findAll();
 
-  // CustomerEntity updateCustomer(CustomerEntity customerEntity);
+ //CustomerEntity updateCustomer(CustomerEntity customerEntity);
 }

@@ -76,6 +76,8 @@ class CustomerServiceImplTest {
     @Test
     void findCustomerByPhoneNumberPositiveTest() {
         CustomerDto customerDto = customerService.findCustomerByPhoneNumber("+380955992668");
+        int id = customerService.findCustomerByPhoneNumber("+380955992668").getId();
+        assertEquals(1,1);
         assertThat(customerDto.getPhone()).isEqualTo("+380955992668");
         assertNotNull(customerDto);
     }

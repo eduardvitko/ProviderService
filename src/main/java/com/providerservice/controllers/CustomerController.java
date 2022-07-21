@@ -22,12 +22,12 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/findCustomerByPhoneNumber")
-    public ResponseEntity<CustomerDto> findCustomerByPhoneNumber(@RequestParam String phoneNumber) {
-        return ResponseEntity.ok(customerService.findCustomerByPhoneNumber(phoneNumber));
+    public ResponseEntity<CustomerDto> findCustomerByPhoneNumber(@RequestParam("phone") String phone) {
+        return ResponseEntity.ok(customerService.findCustomerByPhoneNumber(phone));
     }
 
-    @GetMapping("/customer/findCustomerByID")
-    public ResponseEntity<CustomerDto> findCustomerByID(@RequestParam Integer id) {
+    @GetMapping("/customer/findCustomerByID/{id}")
+    public ResponseEntity<CustomerDto> findCustomerByID(@PathVariable Integer id) {
         return ResponseEntity.ok(customerService.findCustomerByID(id));
     }
 
