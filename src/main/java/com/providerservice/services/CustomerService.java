@@ -11,7 +11,7 @@ import java.util.List;
 public interface CustomerService {
     CustomerDto registration(CustomerRequestDto customerRequestDto);
 
-    void delete(Integer id);
+   void delete(Integer id);
 
     CustomerDto findCustomerByPhoneNumber(String phoneNumber);
 
@@ -19,6 +19,6 @@ public interface CustomerService {
 
     List<CustomerDto> findAllCustomers();
 
-   // CustomerDto updateProfile(CustomerDto customerDto);
+    CustomerDto updateProfile(CustomerDto customerDto);
 
 }

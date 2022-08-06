@@ -7,7 +7,6 @@ import com.providerservice.mapper.CustomerMapper;
 import com.providerservice.model.CustomerEntity;
 import com.providerservice.repositories.CustomerRepository;
 import com.providerservice.services.CustomerService;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,7 +31,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
     @Override
-    public void delete(Integer id) {customerRepository.deleteById(id);}
+    public void delete(Integer id) {
+     customerRepository.deleteById(id);
+    }
 
     @Override
     public CustomerDto findCustomerByPhoneNumber(String phoneNumber) {
@@ -50,11 +51,12 @@ public class CustomerServiceImpl implements CustomerService {
         return customerMapper.collectionToList(customerRepository.findAll(),customerMapper.CustomerToDto) ;
     }
 
-//    @Override
-//    public CustomerDto updateProfile(CustomerDto customerDto) {
-//        CustomerEntity customerEntity = customerMapper.convertToEntity(customerDto);
-//        return customerMapper.convertToDto(customerRepository.updateCustomer(customerEntity));
-//    }
+    @Override
+    public CustomerDto updateProfile(CustomerDto customerDto) {
+        CustomerEntity customerEntity = customerMapper.convertToEntity(customerDto);
+        CustomerEntity newCustomer = customerRepository.save(customerEntity);
+        return customerMapper.convertToDto(newCustomer);
+    }
 
     @Override
     public int hashCode() {
