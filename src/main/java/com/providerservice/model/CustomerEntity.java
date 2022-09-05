@@ -2,8 +2,12 @@ package com.providerservice.model;
 
 
 import lombok.*;
+import lombok.experimental.Accessors;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -11,15 +15,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @ToString
+@Accessors(chain = true)
 @Entity
-@Table(name = "customers")
 public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique = false, nullable = false, updatable = false)
+    @Column(unique = true, nullable = false, updatable = false)
     private String firstName;
-    @Column(unique = false, nullable = false, updatable = false)
+    @Column(unique = true, nullable = false, updatable = false)
     private String lastName;
     @Column(unique = true, nullable = false, updatable = false)
     private String phone;
@@ -30,7 +34,11 @@ public class CustomerEntity {
     @Column
     private boolean isActive;
     @Column
-    private String role;
+    private boolean isNotLocked;
+    @Column
+    private String role; //ROLE_USER{ read, edit }, ROLE_ADMIN {delete}
+    @Column
+    private String[] authorities;
     @Column
     private LocalDateTime created;
     @Column

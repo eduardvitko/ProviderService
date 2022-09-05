@@ -2,6 +2,7 @@ package com.providerservice.controllers;
 
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
+import com.providerservice.model.CustomerEntity;
 import com.providerservice.services.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Optional;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/customer-service")
@@ -37,8 +39,10 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/getAllCustomers")
-    public ResponseEntity<List<CustomerDto>> getAllCustomers() {
-        return ResponseEntity.ok(customerService.findAllCustomers());
+    public ResponseEntity<List<CustomerEntity>> getAllCustomers() {
+//        return ResponseEntity.ok(customerService.findAllCustomers());
+        List<CustomerEntity> customers = customerService.findAllCustomers();
+        return new ResponseEntity<>(customers, OK);
     }
     @DeleteMapping("/customer/delete/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Integer id){

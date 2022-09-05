@@ -2,9 +2,9 @@ package com.providerservice.services;
 
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
+import com.providerservice.model.CustomerEntity;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service
@@ -17,7 +17,7 @@ public interface CustomerService {
 
     CustomerDto findCustomerByID(Integer id);
 
-    List<CustomerDto> findAllCustomers();
+    List<CustomerEntity> findAllCustomers();
 
     CustomerDto updateProfile(CustomerDto customerDto);
 

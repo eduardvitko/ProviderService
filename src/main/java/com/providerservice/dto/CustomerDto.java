@@ -1,10 +1,7 @@
 package com.providerservice.dto;
 
-import com.providerservice.model.Role;
-import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Setter
@@ -20,10 +17,6 @@ public class CustomerDto {
 
     private String lastName;
 
-//    @NotEmpty(message = "mandatoryParametersMissing")
-//    @NotNull
-//    @NotBlank
-//    @Pattern(regexp = "^[0-9]{12}$")
     private String phone;
 
     private String password;
@@ -32,7 +25,9 @@ public class CustomerDto {
 
     private boolean isActive;
 
-    private String role;
+    private boolean isNotLocked;
+    private String role; //ROLE_USER{ read, edit }, ROLE_ADMIN {delete}
+    private String[] authorities;
 
     private LocalDateTime created;
 

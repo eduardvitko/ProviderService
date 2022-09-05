@@ -35,7 +35,9 @@ public class CustomerMapper {
         customerEntity.setPassword(customerDto.getPassword());
         customerEntity.setEmail(customerDto.getEmail());
         customerEntity.setActive(customerDto.isActive());
+        customerEntity.setNotLocked(customerDto.isNotLocked());
         customerEntity.setRole(customerDto.getRole());
+        customerEntity.setAuthorities(customerDto.getAuthorities());
         customerEntity.setCreated(customerDto.getCreated());
         customerEntity.setUpdated(customerDto.getUpdated());
         customerEntity.setBalance(customerDto.getBalance());
@@ -50,7 +52,9 @@ public class CustomerMapper {
         customerDto.setPassword(customerEntity.getPassword());
         customerDto.setEmail(customerEntity.getEmail());
         customerDto.setActive(customerEntity.isActive());
+        customerDto.setNotLocked(customerEntity.isNotLocked());
         customerDto.setRole(customerEntity.getRole());
+        customerDto.setAuthorities(customerEntity.getAuthorities());
         customerDto.setCreated(customerEntity.getCreated());
         customerDto.setUpdated(customerEntity.getUpdated());
         customerDto.setBalance(customerEntity.getBalance());
@@ -65,7 +69,9 @@ public class CustomerMapper {
         customerEntity.setPassword(customerRequestDto.getPassword());
         customerEntity.setEmail(customerRequestDto.getEmail());
         customerEntity.setActive(true);
+        customerEntity.setNotLocked(true);
         customerEntity.setRole("CLIENT");
+        customerEntity.setAuthorities(new String[10]);
         customerEntity.setCreated(LocalDateTime.now());
         customerEntity.setUpdated(LocalDateTime.now());
         customerEntity.setBalance(0);

@@ -1,12 +1,13 @@
 package com.providerservice.serviceImplements;
 
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
-import com.providerservice.exceptions.CustomerException;
 import com.providerservice.mapper.CustomerMapper;
 import com.providerservice.model.CustomerEntity;
 import com.providerservice.repositories.CustomerRepository;
 import com.providerservice.services.CustomerService;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +19,8 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerMapper customerMapper;
     @Resource
     private CustomerRepository customerRepository;
+//    @Resource
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Override
@@ -25,6 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
         if(customerRequestDto.getPhone()==null || customerRequestDto.getPassword()==null||customerRequestDto.getEmail()==null){
             throw new RuntimeException("Value phone is not be empty");
         }
+//        customerRequestDto.setPassword(bCryptPasswordEncoder.encode(customerRequestDto.getPassword()));
         CustomerEntity customerEntity = customerMapper.toCustomerEntity(customerRequestDto);
         CustomerEntity customerEntity1 = customerRepository.save(customerEntity);
         return customerMapper.convertToDto(customerEntity1);
@@ -47,8 +51,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerDto> findAllCustomers() {
-        return customerMapper.collectionToList(customerRepository.findAll(),customerMapper.CustomerToDto) ;
+    public List<CustomerEntity> findAllCustomers() {
+//        return customerMapper.collectionToList(customerRepository.findAll(),customerMapper.CustomerToDto) ;
+        return customerRepository.findAll();
     }
 
     @Override
@@ -58,18 +63,4 @@ public class CustomerServiceImpl implements CustomerService {
         return customerMapper.convertToDto(newCustomer);
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }
