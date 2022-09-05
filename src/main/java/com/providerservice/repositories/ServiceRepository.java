@@ -10,4 +10,5 @@ public interface ServiceRepository extends JpaRepository<ServiceEntity,Integer> 
     ServiceEntity findAllById(int id);
     ServiceEntity findByName(String name);
 
+
 }

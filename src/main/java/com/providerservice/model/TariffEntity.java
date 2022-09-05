@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 @Accessors(chain = true)
-@Entity
+@Entity(name = "tariffs")
 public class TariffEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

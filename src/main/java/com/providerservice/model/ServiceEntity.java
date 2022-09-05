@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @ToString
 @Accessors(chain = true)
-@Entity
+@Entity(name = "services")
 public class ServiceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
