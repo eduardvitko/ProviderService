@@ -31,17 +31,17 @@ public class ServiceMapper {
 
         return serviceEntity;
     }
-    public ServiceDto toServiceDto(ServiceEntity serviceEntity){
-       return new ServiceDto()
-               .setId(serviceEntity.getId())
-               .setName(serviceEntity.getName())
-               .setTariffs(serviceEntity.getTariffs().stream().map(this::convertTariffDto)).collect(toList())
-               .setActive(serviceEntity.isActive())
-               .setCreated(serviceEntity.getCreated())
-               .serviceDto.setUpdated(serviceEntity.getUpdated());
-
-
-    }
+//    public ServiceDto toServiceDto(ServiceEntity serviceEntity){
+//       return new ServiceDto()
+//               .setId(serviceEntity.getId())
+//               .setName(serviceEntity.getName())
+//               .setTariffs(serviceEntity.getTariffs().stream().map(this::convertTariffDto)).collect(toList())
+//               .setActive(serviceEntity.isActive())
+//               .setCreated(serviceEntity.getCreated())
+//               .serviceDto.setUpdated(serviceEntity.getUpdated());
+//
+//
+//    }
 
 
 
