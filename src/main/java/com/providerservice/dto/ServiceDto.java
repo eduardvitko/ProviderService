@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Data
 @Setter
 @Getter
 @NoArgsConstructor

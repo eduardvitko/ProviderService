@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -22,7 +23,7 @@ public class ServiceEntity {
     @Column(unique = true, nullable = false, updatable = false)
     private String name;
     @OneToMany
-    private List<TariffEntity> tariffs;
+    private Set<TariffEntity> tariffs;
     @Column
     private boolean isActive;
     @Column
