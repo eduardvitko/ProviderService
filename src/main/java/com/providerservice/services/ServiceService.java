@@ -8,6 +8,8 @@ import java.util.List;
 
 @Service
 public interface ServiceService {
-    ServiceEntity createService(ServiceDto serviceDto);
-    List<ServiceDto>findAll();
+    ServiceEntity createService(ServiceEntity serviceEntity);
+    List<ServiceEntity>findAll();
+   void deleteById(int id);
+    ServiceEntity findByID(int id);
 }

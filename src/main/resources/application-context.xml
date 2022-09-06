@@ -6,4 +6,5 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="CustomerServiceImpl" class="com.providerservice.serviceImplements.CustomerServiceImpl" />
+    <bean id="ServiceServiceImpl" class="com.providerservice.serviceImplements.ServiceServiceImpl" />
 </beans>
