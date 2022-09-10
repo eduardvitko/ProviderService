@@ -2,9 +2,15 @@ package com.providerservice.mapper;
 
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
+import com.providerservice.dto.RoleDto;
 import com.providerservice.model.CustomerEntity;
+import com.providerservice.model.Role;
+import com.providerservice.repositories.RoleRepositories;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +20,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomerMapper {
+    @Resource
+    private RoleRepositories roleRepositories;
 
     public Function<CustomerEntity, CustomerDto> CustomerToDto = this::convertToDto;
     public Function<CustomerDto, CustomerEntity> CustomerToEntity = this::convertToEntity;
@@ -35,9 +43,7 @@ public class CustomerMapper {
         customerEntity.setPassword(customerDto.getPassword());
         customerEntity.setEmail(customerDto.getEmail());
         customerEntity.setActive(customerDto.isActive());
-        customerEntity.setNotLocked(customerDto.isNotLocked());
-        customerEntity.setRole(customerDto.getRole());
-        customerEntity.setAuthorities(customerDto.getAuthorities());
+        customerEntity.setRoles(customerDto.getRole().stream().map(roleDto -> roleRepositories.findByRole(roleDto.getRole())).collect(Collectors.toList()));
         customerEntity.setCreated(customerDto.getCreated());
         customerEntity.setUpdated(customerDto.getUpdated());
         customerEntity.setBalance(customerDto.getBalance());
@@ -52,9 +58,7 @@ public class CustomerMapper {
         customerDto.setPassword(customerEntity.getPassword());
         customerDto.setEmail(customerEntity.getEmail());
         customerDto.setActive(customerEntity.isActive());
-        customerDto.setNotLocked(customerEntity.isNotLocked());
-        customerDto.setRole(customerEntity.getRole());
-        customerDto.setAuthorities(customerEntity.getAuthorities());
+        customerDto.setRole(customerEntity.getRoles().stream().map(r -> toRoleDto(r)).collect(Collectors.toList()));
         customerDto.setCreated(customerEntity.getCreated());
         customerDto.setUpdated(customerEntity.getUpdated());
         customerDto.setBalance(customerEntity.getBalance());
@@ -69,13 +73,22 @@ public class CustomerMapper {
         customerEntity.setPassword(customerRequestDto.getPassword());
         customerEntity.setEmail(customerRequestDto.getEmail());
         customerEntity.setActive(true);
-        customerEntity.setNotLocked(true);
-        customerEntity.setRole("CLIENT");
-        customerEntity.setAuthorities(new String[10]);
+        customerEntity.setRoles(new ArrayList<>());
         customerEntity.setCreated(LocalDateTime.now());
         customerEntity.setUpdated(LocalDateTime.now());
         customerEntity.setBalance(0);
         return customerEntity;
 
+    }
+    public RoleDto toRoleDto(Role role) {
+        RoleDto roleDto = new RoleDto();
+        roleDto.setId(role.getId());
+        roleDto.setRole(roleDto.getRole());
+        return roleDto;
+    }
+
+    public Role toRoleEntity(RoleDto role) {
+        Role current = roleRepositories.findByRole(role.getRole());
+        return current;
     }
 }

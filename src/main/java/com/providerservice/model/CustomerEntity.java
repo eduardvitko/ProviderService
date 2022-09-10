@@ -33,12 +33,11 @@ public class CustomerEntity {
     private String email;
     @Column
     private boolean isActive;
-    @Column
-    private boolean isNotLocked;
-    @Column
-    private String role; //ROLE_USER{ read, edit }, ROLE_ADMIN {delete}
-    @Column
-    private String[] authorities;
+    @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @JoinTable(name="user_roles", joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
+            inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
+    )
+    private List<Role> roles;
     @Column
     private LocalDateTime created;
     @Column

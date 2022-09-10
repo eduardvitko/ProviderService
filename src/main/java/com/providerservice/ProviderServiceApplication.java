@@ -13,14 +13,12 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static com.providerservice.constant.FileConstant.USER_FOLDER;
-
 @SpringBootApplication
 public class ProviderServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ProviderServiceApplication.class, args);
-        new File(USER_FOLDER).mkdirs();
+
     }
 
     @Bean

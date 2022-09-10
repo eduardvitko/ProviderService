@@ -3,6 +3,7 @@ package com.providerservice.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -25,9 +26,7 @@ public class CustomerDto {
 
     private boolean isActive;
 
-    private boolean isNotLocked;
-    private String role; //ROLE_USER{ read, edit }, ROLE_ADMIN {delete}
-    private String[] authorities;
+    private List<RoleDto> role; //ROLE_USER{ read, edit }, ROLE_ADMIN {delete}
 
     private LocalDateTime created;
 
