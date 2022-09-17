@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -43,7 +40,7 @@ public class CustomerMapper {
         customerEntity.setPassword(customerDto.getPassword());
         customerEntity.setEmail(customerDto.getEmail());
         customerEntity.setActive(customerDto.isActive());
-        customerEntity.setRoles(customerDto.getRole().stream().map(roleDto -> roleRepositories.findByRole(roleDto.getRole())).collect(Collectors.toList()));
+        customerEntity.setRoles(customerDto.getRole().stream().map(r -> toRoleEntity(r)).collect(Collectors.toList()));
         customerEntity.setCreated(customerDto.getCreated());
         customerEntity.setUpdated(customerDto.getUpdated());
         customerEntity.setBalance(customerDto.getBalance());
@@ -63,6 +60,21 @@ public class CustomerMapper {
         customerDto.setUpdated(customerEntity.getUpdated());
         customerDto.setBalance(customerEntity.getBalance());
         return customerDto;
+    }
+    public CustomerDto conversationToDto(CustomerRequestDto customerRequestDto){
+        CustomerDto customerDto = new CustomerDto();
+        customerDto.setId(customerRequestDto.getId());
+        customerDto.setFirstName(customerRequestDto.getFirstName());
+        customerDto.setLastName(customerRequestDto.getLastName());
+        customerDto.setPhone(customerRequestDto.getPhone());
+        customerDto.setPassword(customerRequestDto.getPassword());
+        customerDto.setEmail(customerRequestDto.getEmail());
+        customerDto.setActive(true);
+        customerDto.setRole(Arrays.asList(new RoleDto(0,"CLIENT")));
+        customerDto.setCreated(LocalDateTime.now());
+        customerDto.setUpdated(LocalDateTime.now());
+        customerDto.setBalance(0);
+       return customerDto;
     }
 
     public CustomerEntity toCustomerEntity(CustomerRequestDto customerRequestDto){
@@ -88,7 +100,9 @@ public class CustomerMapper {
     }
 
     public Role toRoleEntity(RoleDto role) {
-        Role current = roleRepositories.findByRole(role.getRole());
-        return current;
+      Role role1 = new Role();
+      role1.setId(role.getId());
+      role1.setRole(role.getRole());
+        return role1;
     }
 }

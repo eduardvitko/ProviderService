@@ -1,23 +1,24 @@
 package com.providerservice.serviceImplements;
 
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
+import com.providerservice.dto.RoleDto;
 import com.providerservice.mapper.CustomerMapper;
 import com.providerservice.model.CustomerEntity;
-import com.providerservice.model.CustomUserDetailsService;
 import com.providerservice.repositories.CustomerRepository;
 import com.providerservice.services.CustomerService;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -28,9 +29,10 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerMapper customerMapper;
     @Resource
     private CustomerRepository customerRepository;
+    @Resource
     private BCryptPasswordEncoder passwordEncoder;
 
-    public CustomerServiceImpl(CustomerMapper customerMapper, CustomerRepository customerRepository, BCryptPasswordEncoder passwordEncoder) {
+    public CustomerServiceImpl(CustomerMapper customerMapper, CustomerRepository customerRepository) {
         this.customerMapper = customerMapper;
         this.customerRepository = customerRepository;
         this.passwordEncoder = passwordEncoder;
@@ -38,23 +40,30 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto registration(CustomerRequestDto customerRequestDto) {
-        if(customerRequestDto.getPhone()==null || customerRequestDto.getPassword()==null||customerRequestDto.getEmail()==null){
+        if (customerRequestDto.getPhone() == null || customerRequestDto.getPassword() == null || customerRequestDto.getEmail() == null) {
             throw new RuntimeException("Value phone is not be empty");
         }
-//        customerRequestDto.setPassword(bCryptPasswordEncoder.encode(customerRequestDto.getPassword()));
-        CustomerEntity customerEntity = customerMapper.toCustomerEntity(customerRequestDto);
-        CustomerEntity customerEntity1 = customerRepository.save(customerEntity);
-        return customerMapper.convertToDto(customerEntity1);
+        CustomerDto customerDto = customerMapper.conversationToDto(customerRequestDto);
+        System.out.println(customerDto + "DTO");
+        customerDto.setPassword(customerRequestDto.getPassword());
+        customerDto.setPassword(passwordEncoder.encode(customerDto.getPassword()));
+
+
+        CustomerEntity customerEntity = customerMapper.convertToEntity(customerDto);
+        customerEntity= customerRepository.save(customerEntity);
+        System.out.println(customerEntity + "ENTITY");
+        return customerMapper.convertToDto(customerEntity);
 
     }
+
     @Override
     public void delete(Integer id) {
-     customerRepository.deleteById(id);
+        customerRepository.deleteById(id);
     }
 
     @Override
     public CustomerDto findCustomerByPhoneNumber(String phoneNumber) {
-        CustomerEntity customerEntity= customerRepository.findCustomerEntitiesByPhone(phoneNumber);
+        CustomerEntity customerEntity = customerRepository.findCustomerEntitiesByPhone(phoneNumber);
         return customerMapper.convertToDto(customerEntity);
     }
 
@@ -65,8 +74,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerEntity> findAllCustomers() {
-//        return customerMapper.collectionToList(customerRepository.findAll(),customerMapper.CustomerToDto) ;
-        return customerRepository.findAll();
+        List<CustomerEntity> customerEntities = customerRepository.findAll();
+        return customerEntities;
     }
 
     @Override

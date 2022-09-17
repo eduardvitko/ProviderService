@@ -3,6 +3,7 @@ package com.providerservice.serviceImplements;
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
 import com.providerservice.exceptions.CustomerException;
+import com.providerservice.model.CustomerEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -27,19 +28,21 @@ class CustomerServiceImplTest {
     @Test
     void registrationPositiveTest() {
         CustomerRequestDto customerRequestDto = new CustomerRequestDto();
-        customerRequestDto.setFirstName("Victor");
-        customerRequestDto.setLastName("Galko");
-        customerRequestDto.setPhone("+380632231255");
-        customerRequestDto.setPassword("25031952");
-        customerRequestDto.setEmail("d@gmail.com");
+        customerRequestDto.setFirstName("Nikolay");
+        customerRequestDto.setLastName("Titenko");
+        customerRequestDto.setPhone("+380505047310");
+        customerRequestDto.setPassword("20101300");
+        customerRequestDto.setEmail("vitko@gmail.com");
+
+
 
         CustomerDto customerDto = customerService.registration(customerRequestDto);
-        Integer id = customerService.findCustomerByPhoneNumber("+380632231255").getId();
+        Integer id = customerService.findCustomerByPhoneNumber("+380505047310").getId();
 
         assertEquals(1, 1);
         assertNotNull(customerDto);
 
-        customerService.delete(id);
+        //customerService.delete(id);
     }
     @Test
     void registrationNegativeNotPhoneTest() {
@@ -87,13 +90,13 @@ class CustomerServiceImplTest {
         assertThat(customerDto.getPhone()).isEqualTo("+380667475521");
         assertNotNull(customerDto);
     }
-//    @Test
-//    void findAllCustomersPositiveTest(){
-//        List<CustomerDto> customerDtoList = customerService.findAllCustomers();
-//        Integer size = customerDtoList.size();
-//        assertNotNull(customerDtoList);
-//        assertEquals(size,size);
-//    }
+    @Test
+    void findAllCustomersPositiveTest(){
+        List<CustomerEntity> customerEntities = customerService.findAllCustomers();
+        Integer size = customerEntities.size();
+        assertNotNull(customerEntities);
+        assertEquals(size,size);
+    }
 //    @Test
 //    void updateProfileCustomerPositiveTest(){
 ////        CustomerRequestDto customerRequestDto = new CustomerRequestDto("Ivan","Budko","+380995214036","00264567","budko@gmail.com");

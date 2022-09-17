@@ -1,6 +1,6 @@
-package com.providerservice.constant;
+package com.providerservice.filter;
 
-public class SecurityConstant {
+public interface SecurityConstant {
 
     String SECRET = "SecretKeyToGenJWTs";
     String TOKEN_PREFIX = "Bearer ";

@@ -3,7 +3,7 @@ package com.providerservice.controllers;
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.CustomerRequestDto;
 import com.providerservice.model.CustomerEntity;
-import com.providerservice.services.CustomerService;
+import com.providerservice.serviceImplements.CustomerServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping("/customer-service")
 public class CustomerController {
     @Resource
-    private CustomerService customerService;
+    private CustomerServiceImpl customerService;
 
     @PostMapping("/customer/registration")
     public ResponseEntity<CustomerDto> registration(@RequestBody CustomerRequestDto customerRequestDto) {
@@ -40,7 +40,7 @@ public class CustomerController {
 
     @GetMapping("/customer/getAllCustomers")
     public ResponseEntity<List<CustomerEntity>> getAllCustomers() {
-//        return ResponseEntity.ok(customerService.findAllCustomers());
+     //  return ResponseEntity.ok(customerService.findAllCustomers());
         List<CustomerEntity> customers = customerService.findAllCustomers();
         return new ResponseEntity<>(customers, OK);
     }
@@ -50,5 +50,7 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    }
 
-}
+
+

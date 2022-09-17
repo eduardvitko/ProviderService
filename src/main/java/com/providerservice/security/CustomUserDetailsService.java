@@ -1,4 +1,4 @@
-package com.providerservice.model;
+package com.providerservice.security;
 
 import com.providerservice.dto.CustomerDto;
 import com.providerservice.dto.RoleDto;
@@ -9,12 +9,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.stream;
 
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired

@@ -9,6 +9,8 @@ import lombok.*;
 @Builder
 @ToString
 public class CustomerRequestDto {
+    private int id;
+
     private String firstName;
 
     private String lastName;
