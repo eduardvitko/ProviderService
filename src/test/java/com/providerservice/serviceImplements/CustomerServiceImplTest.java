@@ -27,20 +27,20 @@ class CustomerServiceImplTest {
 
     @Test
     void registrationPositiveTest() {
-        CustomerRequestDto customerRequestDto = new CustomerRequestDto();
-        customerRequestDto.setFirstName("Nikolay");
-        customerRequestDto.setLastName("Titenko");
-        customerRequestDto.setPhone("+380505047310");
-        customerRequestDto.setPassword("20101300");
-        customerRequestDto.setEmail("vitko@gmail.com");
+      CustomerEntity customerEntity = new CustomerEntity();
+        customerEntity.setFirstName("Viktor");
+        customerEntity.setLastName("Stepanenko");
+        customerEntity.setPhone("+380505214123");
+        customerEntity.setPassword("19012001");
+        customerEntity.setEmail("stepanenko@gmail.com");
 
 
 
-        CustomerDto customerDto = customerService.registration(customerRequestDto);
-        Integer id = customerService.findCustomerByPhoneNumber("+380505047310").getId();
+        CustomerEntity customerEntity1 = customerService.registration(customerEntity);
+        Integer id = customerService.findCustomerByPhoneNumber("+380505214123").getId();
 
         assertEquals(1, 1);
-        assertNotNull(customerDto);
+        assertNotNull(customerEntity1);
 
         //customerService.delete(id);
     }
@@ -78,17 +78,17 @@ class CustomerServiceImplTest {
 
     @Test
     void findCustomerByPhoneNumberPositiveTest() {
-        CustomerDto customerDto = customerService.findCustomerByPhoneNumber("+380955992668");
+       CustomerEntity customerEntity = customerService.findCustomerByPhoneNumber("+380955992668");
         int id = customerService.findCustomerByPhoneNumber("+380955992668").getId();
         assertEquals(1,1);
-        assertThat(customerDto.getPhone()).isEqualTo("+380955992668");
-        assertNotNull(customerDto);
+        assertThat(customerEntity.getPhone()).isEqualTo("+380955992668");
+        assertNotNull(customerEntity);
     }
     @Test
     void findCustomerByIDPositiveTest(){
-        CustomerDto customerDto = customerService.findCustomerByID(2);
-        assertThat(customerDto.getPhone()).isEqualTo("+380667475521");
-        assertNotNull(customerDto);
+        CustomerEntity customerEntity = customerService.findCustomerByID(2);
+        assertThat(customerEntity.getPhone()).isEqualTo("+380667475521");
+        assertNotNull(customerEntity);
     }
     @Test
     void findAllCustomersPositiveTest(){

@@ -6,6 +6,8 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -37,7 +39,7 @@ public class CustomerEntity {
     @JoinTable(name="user_roles", joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
             inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
     )
-    private List<Role> roles;
+    private Collection<Role> roles =new ArrayList<>();
     @Column
     private LocalDateTime created;
     @Column

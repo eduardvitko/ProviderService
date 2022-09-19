@@ -1,7 +1,7 @@
 package com.providerservice.security;
 
-import com.providerservice.dto.CustomerDto;
-import com.providerservice.dto.RoleDto;
+import com.providerservice.model.CustomerEntity;
+import com.providerservice.model.Role;
 import com.providerservice.serviceImplements.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,22 +23,22 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
-       CustomerDto customerDto = customerService.findCustomerByPhoneNumber(phone);
-        System.out.println(customerDto);
-        if (customerDto!= null) {
-            List<GrantedAuthority> authorities = getUserAuthority((List<RoleDto>) customerDto.getRole());
-            return buildUserForAuthentication(customerDto, authorities);
+       CustomerEntity customerEntity = customerService.findCustomerByPhoneNumber(phone);
+        System.out.println(customerEntity);
+        if (customerEntity!= null) {
+            List<GrantedAuthority> authorities = getUserAuthority((List<Role>) customerEntity.getRoles());
+            return buildUserForAuthentication(customerEntity, authorities);
         } else {
             throw new UsernameNotFoundException("user with email " + phone + " does not exist.");
         }
     }
-    private List<GrantedAuthority> getUserAuthority(List<RoleDto> userRoles) {
+    private List<GrantedAuthority> getUserAuthority(List<Role> userRoles) {
         List<GrantedAuthority> roles = new ArrayList<>();
         userRoles.forEach((role) -> {roles.add(new SimpleGrantedAuthority(role.getRole())); });
         return new ArrayList<GrantedAuthority>(roles);
     }
 
-    private UserDetails buildUserForAuthentication(CustomerDto customerDto, List<GrantedAuthority> authorities) {
+    private UserDetails buildUserForAuthentication(CustomerEntity customerDto, List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(customerDto.getPhone(), customerDto.getPassword(), authorities);
     }
 }
