@@ -46,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerEntity registration(CustomerEntity customerEntity) {
         log.info("Saving new Customer{} to database", customerEntity.getPhone());
-        customerEntity.getRoles().add(new Role(4,"ADMIN"));
+        //customerEntity.getRoles().add(new Role(4,"ADMIN"));
         CustomerEntity customerEntiti = customerRepository.save(customerEntity);
 
         return customerEntiti;
