@@ -1,6 +1,6 @@
 package com.providerservice;
 
-import com.providerservice.dto.CustomerRequestDto;
+
 import com.providerservice.model.CustomerEntity;
 import com.providerservice.model.Role;
 import com.providerservice.services.CustomerService;
@@ -8,14 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import java.io.File;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;

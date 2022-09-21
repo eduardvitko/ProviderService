@@ -1,8 +1,7 @@
 package com.providerservice.serviceImplements;
 
 
-import com.providerservice.dto.CustomerDto;
-import com.providerservice.dto.CustomerRequestDto;
+
 
 import com.providerservice.model.CustomerEntity;
 import com.providerservice.model.Role;
@@ -10,23 +9,30 @@ import com.providerservice.repositories.CustomerRepository;
 import com.providerservice.repositories.RoleRepositories;
 import com.providerservice.services.CustomerService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
 @Service
 @Transactional
 @Slf4j
-//@Qualifier("userDetailsService")
-public class CustomerServiceImpl implements CustomerService {
+@RequiredArgsConstructor
+public class CustomerServiceImpl implements CustomerService, UserDetailsService {
 //    @Resource
 //    private CustomerMapper customerMapper;
     @Resource
@@ -114,4 +120,19 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        CustomerEntity customerEntity = customerRepository.findCustomerEntitiesByPhone(username);
+        if(customerEntity ==  null){
+            log.error("customer is not in the database");
+            throw new UsernameNotFoundException("customer is not in the database");
+        }
+        else {
+            log.info("user found in the database{}",username);
+        }
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        customerEntity.getRoles().forEach(role -> {authorities.add(new SimpleGrantedAuthority(role.getRole()));});
+        return new org.springframework.security.core.userdetails.User(customerEntity.getPhone(),customerEntity.getPassword(),authorities);
+
+    }
 }
