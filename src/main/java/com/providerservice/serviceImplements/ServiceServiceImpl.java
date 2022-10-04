@@ -1,7 +1,7 @@
 package com.providerservice.serviceImplements;
 
 import com.providerservice.dto.ServiceDto;
-import com.providerservice.mapper.TariffMapper;
+
 import com.providerservice.model.ServiceEntity;
 import com.providerservice.repositories.ServiceRepository;
 import com.providerservice.services.ServiceService;
@@ -15,8 +15,7 @@ import java.util.List;
 public class ServiceServiceImpl implements ServiceService {
     @Resource
     private ServiceRepository serviceRepository;
-    @Resource
-    private TariffMapper tariffMapper;
+
 
     @Override
     public ServiceEntity createService(ServiceEntity serviceEntity) {

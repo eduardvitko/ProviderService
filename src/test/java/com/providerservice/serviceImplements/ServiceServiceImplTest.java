@@ -1,13 +1,14 @@
 package com.providerservice.serviceImplements;
 
 import com.providerservice.dto.ServiceDto;
-import com.providerservice.mapper.TariffMapper;
+
 import com.providerservice.model.ServiceEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 
@@ -15,14 +16,13 @@ import java.util.HashSet;
 class ServiceServiceImplTest {
     @Resource
     private ServiceServiceImpl serviceService;
-    @Resource
-    private TariffMapper tariffMapper;
+
 
     @Test
     void createServicePositiveTest() {
         ServiceEntity serviceEntity = new ServiceEntity();
         serviceEntity.setName("INTERNET");
-        serviceEntity.setTariffs(new HashSet<>());
+        serviceEntity.setTariffs(new ArrayList<>());
         serviceEntity.setActive(true);
         serviceEntity.setCreated(LocalDateTime.now());
         serviceEntity.setUpdated(LocalDateTime.now());

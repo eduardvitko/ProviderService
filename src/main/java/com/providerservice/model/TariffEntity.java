@@ -22,12 +22,12 @@ public class TariffEntity {
     private String name;
     @Column(unique = true, nullable = false, updatable = false)
     private ServiceType type;
-    @Column
+    @Column(name = "pricePerDay")
     private int pricePerDay;
-    @Column
+    @Column(name = "isActive")
     private boolean isActive;
-    @Column
+    @Column(name = "created")
     private LocalDateTime created;
-    @Column
+    @Column(name = "updated")
     private LocalDateTime updated;
 }

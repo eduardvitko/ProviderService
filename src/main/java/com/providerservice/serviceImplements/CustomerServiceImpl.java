@@ -18,6 +18,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -39,8 +40,8 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     private CustomerRepository customerRepository;
     @Resource
     private RoleRepositories roleRepositories;
-//    @Resource
-//    private BCryptPasswordEncoder passwordEncoder;
+    @Resource
+    private BCryptPasswordEncoder passwordEncoder;
     @Resource
     private CustomerService customerService;
 
@@ -52,6 +53,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
     @Override
     public CustomerEntity registration(CustomerEntity customerEntity) {
         log.info("Saving new Customer{} to database", customerEntity.getPhone());
+        customerEntity.setPassword(passwordEncoder.encode(customerEntity.getPassword()));
         //customerEntity.getRoles().add(new Role(4,"ADMIN"));
         CustomerEntity customerEntiti = customerRepository.save(customerEntity);
 
@@ -121,18 +123,21 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CustomerEntity customerEntity = customerRepository.findCustomerEntitiesByPhone(username);
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+        CustomerEntity customerEntity = customerRepository.findCustomerEntitiesByPhone(phone);
         if(customerEntity ==  null){
             log.error("customer is not in the database");
             throw new UsernameNotFoundException("customer is not in the database");
         }
         else {
-            log.info("user found in the database{}",username);
+            log.info("user found in the database{}", phone);
         }
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        customerEntity.getRoles().forEach(role -> {authorities.add(new SimpleGrantedAuthority(role.getRole()));});
-        return new org.springframework.security.core.userdetails.User(customerEntity.getPhone(),customerEntity.getPassword(),authorities);
+
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            customerEntity.getRoles().forEach(role -> {
+                authorities.add(new SimpleGrantedAuthority(role.getRole()));
+            });
+            return new org.springframework.security.core.userdetails.User(customerEntity.getPhone(), customerEntity.getPassword(), authorities);
 
     }
 }

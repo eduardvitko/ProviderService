@@ -33,17 +33,17 @@ public class CustomerEntity {
     private String password;
     @Column(unique = true, nullable = false, updatable = false)
     private String email;
-    @Column
+    @Column(name = "isActive")
     private boolean isActive;
     @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name="user_roles", joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
             inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
     )
     private Collection<Role> roles =new ArrayList<>();
-    @Column
+    @Column(name = "created")
     private LocalDateTime created;
-    @Column
+    @Column(name = "updated")
     private LocalDateTime updated;
-    @Column
+    @Column(name = "balance")
     private int balance;
 }

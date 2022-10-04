@@ -23,12 +23,12 @@ public class ServiceEntity {
     @Column(unique = true, nullable = false, updatable = false)
     private String name;
     @OneToMany
-    private Set<TariffEntity> tariffs;
-    @Column
+    private List<TariffEntity> tariffs;
+    @Column(name = "isActive")
     private boolean isActive;
-    @Column
+    @Column(name = "created")
     private LocalDateTime created;
-    @Column
+    @Column(name = "updated")
     private LocalDateTime updated;
 
 }
