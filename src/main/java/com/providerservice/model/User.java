@@ -10,16 +10,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@ToString
-@Accessors(chain = true)
 @Entity
-public class CustomerEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,6 +23,8 @@ public class CustomerEntity {
     @Column(unique = true, nullable = false, updatable = false)
     private String lastName;
     @Column(unique = true, nullable = false, updatable = false)
+    private String username;
+    @Column(unique = true, nullable = false, updatable = false)
     private String phone;
     @Column(unique = true, nullable = false, updatable = false)
     private String password;
@@ -35,10 +32,7 @@ public class CustomerEntity {
     private String email;
     @Column(name = "isActive")
     private boolean isActive;
-    @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinTable(name="user_roles", joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
-            inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")}
-    )
+    @ManyToMany(fetch=FetchType.EAGER)
     private Collection<Role> roles =new ArrayList<>();
     @Column(name = "created")
     private LocalDateTime created;

@@ -8,5 +8,5 @@ import javax.annotation.Resource;
 
 @Repository
 public interface RoleRepositories extends JpaRepository<Role, Integer> {
-    Role findByRole(String role);
+    Role findByName(String name);
 }
