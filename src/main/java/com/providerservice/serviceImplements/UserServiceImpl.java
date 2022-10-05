@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addRoleToCustomer(String username, String roleName) {
+    public void addRoleToUser(String username, String roleName) {
         log.info("Adding role{} to user{}", username, roleName);
         User user = userRepository.findByUsername(username);
         Role role = roleRepositories.findByName(roleName);

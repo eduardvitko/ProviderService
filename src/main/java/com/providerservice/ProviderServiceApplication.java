@@ -3,6 +3,10 @@ package com.providerservice;
 
 
 
+import com.providerservice.model.Role;
+import com.providerservice.model.User;
+import com.providerservice.services.UserService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -27,23 +31,25 @@ public class ProviderServiceApplication {
 
     }
 
-//    @Bean
-//    CommandLineRunner run(CustomerService customerService) {
-//        return args -> {
-//            customerService.saveRole(new Role(0, "CLIENT"));
-//            customerService.saveRole(new Role(0, "MANAGER"));
-//            customerService.saveRole(new Role(0, "ADMIN"));
-//
-//            customerService.registration(new CustomerEntity(0, "Ivan", "Cheban", "+380664127412", "02121980", "ivan_cheban@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
-//            customerService.registration(new CustomerEntity(0, "Peter", "Filonenko", "+380632018963", "11051981", "fill@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
-//            customerService.registration(new CustomerEntity(0, "Viktor", "Vitko", "+380501024732", "22101982", "vikvit@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
-//
-//
-//            customerService.addRoleToCustomer("+380664127412", "ADMIN");
-//            customerService.addRoleToCustomer("+380632018963", "MANAGER");
-//            customerService.addRoleToCustomer("+380501024732", "CLIENT");
-//        };
-//    }
+    @Bean
+    CommandLineRunner run(UserService userService) {
+        return args -> {
+            userService.saveRole(new Role(0, "CLIENT"));
+            userService.saveRole(new Role(0, "MANAGER"));
+            userService.saveRole(new Role(0, "ADMIN"));
+
+            userService.saveUser(new User(0, "Ivan", "Cheban","Ivan_Cheban", "+380664127412", "02121980", "ivan_cheban@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
+            userService.saveUser(new User(0, "Peter", "Filonenko","Fill" ,"+380632018963", "11051981", "fill@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
+            userService.saveUser(new User(0, "Viktor", "Vitko","Vito", "+380501024732", "22101982", "vikvit@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
+
+
+            userService.addRoleToUser("Ivan_Cheban", "ADMIN");
+            userService.addRoleToUser("Fill", "MANAGER");
+            userService.addRoleToUser("Vito", "CLIENT");
+
+
+        };
+    }
 //
 //
 //    @Bean
@@ -65,6 +71,6 @@ public class ProviderServiceApplication {
 //    @Bean
 //    public BCryptPasswordEncoder bCryptPasswordEncoder() {
 //        return new BCryptPasswordEncoder();
-//    }
+   }
 
-}
+
