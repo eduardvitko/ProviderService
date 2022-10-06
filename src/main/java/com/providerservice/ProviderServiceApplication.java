@@ -5,6 +5,8 @@ package com.providerservice;
 
 import com.providerservice.model.Role;
 import com.providerservice.model.User;
+
+
 import com.providerservice.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +15,8 @@ import org.springframework.context.annotation.Bean;
 
 
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -53,8 +57,7 @@ public class ProviderServiceApplication {
     }
 
 
-
-//    @Bean
+    //    @Bean
 //    public CorsFilter corsFilter() {
 //        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
 //        CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -70,9 +73,11 @@ public class ProviderServiceApplication {
 //        return new CorsFilter(urlBasedCorsConfigurationSource);
 //    }
 //
-//    @Bean
-//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+   }
 }
+
+
 

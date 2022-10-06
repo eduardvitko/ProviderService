@@ -1,9 +1,10 @@
 //package com.providerservice.security;
 //
 //import com.providerservice.filter.AuthentificationFilter;
-//import com.providerservice.filter.AutorithationFilter;
+//
 //
 //import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.core.annotation.Order;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,9 +13,11 @@
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 //import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 //import org.springframework.security.config.http.SessionCreationPolicy;
+//import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //
+//import javax.annotation.Resource;
 //import javax.servlet.http.HttpServletResponse;
 //
 //@EnableWebSecurity
@@ -23,11 +26,11 @@
 //    @Order(1)
 //    public static class ApiWebSecurityAdapter extends WebSecurityConfigurerAdapter {
 //
-//        @Autowired
+//        @Resource
 //        private BCryptPasswordEncoder bCryptPasswordEncoder;
 //
-//        @Autowired
-//        private CustomUserDetailsService userDetailsService;
+//        @Resource
+//        private UserDetailsService userDetailsService;
 //
 //        @Override
 //        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -52,7 +55,7 @@
 //                    .authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
 //                    .and()
 //                    .addFilter(new AuthentificationFilter(authenticationManager()))
-//                    .addFilter(new AutorithationFilter(authenticationManager()))
+//                    //.addFilter(new AutorithationFilter(authenticationManager()))
 //                    .sessionManagement()
 //                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 //        }
@@ -63,14 +66,14 @@
 //    @Configuration
 //    @Order(2)
 //    public static class FormLoginConfigureAdapter extends WebSecurityConfigurerAdapter {
-//        @Autowired
+//        @Resource
 //        private BCryptPasswordEncoder bCryptPasswordEncoder;
 //
-//        @Autowired
-//        private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+////        @Resource
+////        private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 //
-//        @Autowired
-//        private CustomUserDetailsService userDetailsService;
+//        @Resource
+//        private UserDetailsService userDetailsService;
 //
 //        @Override
 //        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -103,12 +106,12 @@
 //                    .failureUrl("/login?error=true")
 //                    .usernameParameter("email")
 //                    .passwordParameter("password")
-//                    .successHandler(customAuthenticationSuccessHandler)
+//                    //.successHandler(customAuthenticationSuccessHandler)
 //                    .and()
 //                    .logout()
 //                    .permitAll()
 //                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                    .logoutSuccessHandler(new CustomLogoutSuccessHandler())
+//                    //.logoutSuccessHandler(new CustomLogoutSuccessHandler())
 //                    .deleteCookies("JSESSIONID")
 //                    .logoutSuccessUrl("/")
 //                    .and()
