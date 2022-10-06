@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -38,9 +39,9 @@ public class ProviderServiceApplication {
             userService.saveRole(new Role(0, "MANAGER"));
             userService.saveRole(new Role(0, "ADMIN"));
 
-            userService.saveUser(new User(0, "Ivan", "Cheban","Ivan_Cheban", "+380664127412", "02121980", "ivan_cheban@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
-            userService.saveUser(new User(0, "Peter", "Filonenko","Fill" ,"+380632018963", "11051981", "fill@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
-            userService.saveUser(new User(0, "Viktor", "Vitko","Vito", "+380501024732", "22101982", "vikvit@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
+            userService.saveUser(new User(0, "Ivan", "Cheban", "Ivan_Cheban", "+380664127412", "02121980", "ivan_cheban@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
+            userService.saveUser(new User(0, "Peter", "Filonenko", "Fill", "+380632018963", "11051981", "fill@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
+            userService.saveUser(new User(0, "Viktor", "Vitko", "Vito", "+380501024732", "22101982", "vikvit@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
 
 
             userService.addRoleToUser("Ivan_Cheban", "ADMIN");
@@ -50,8 +51,9 @@ public class ProviderServiceApplication {
 
         };
     }
-//
-//
+
+
+
 //    @Bean
 //    public CorsFilter corsFilter() {
 //        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
@@ -71,6 +73,6 @@ public class ProviderServiceApplication {
 //    @Bean
 //    public BCryptPasswordEncoder bCryptPasswordEncoder() {
 //        return new BCryptPasswordEncoder();
-   }
-
+//    }
+}
 

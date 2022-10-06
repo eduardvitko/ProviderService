@@ -1,6 +1,6 @@
 //package com.providerservice.security;
 //
-//import com.providerservice.filter.AutentificationFilter;
+//import com.providerservice.filter.AuthentificationFilter;
 //import com.providerservice.filter.AutorithationFilter;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@
 //                    .exceptionHandling()
 //                    .authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
 //                    .and()
-//                    .addFilter(new AutentificationFilter(authenticationManager()))
+//                    .addFilter(new AuthentificationFilter(authenticationManager()))
 //                    .addFilter(new AutorithationFilter(authenticationManager()))
 //                    .sessionManagement()
 //                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
