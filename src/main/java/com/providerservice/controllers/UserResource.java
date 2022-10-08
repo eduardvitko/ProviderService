@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.List;
 
@@ -37,6 +39,10 @@ public class UserResource {
     public ResponseEntity<?>addRoleToUser(@RequestBody roleToUserForm form) {
         userService.addRoleToUser(form.username, form.roleName);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/token/refresh")
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) {
+
     }
     @Data
     class roleToUserForm{
