@@ -3,30 +3,22 @@ package com.providerservice;
 
 
 
+import com.providerservice.model.ERole;
 import com.providerservice.model.Role;
 import com.providerservice.model.User;
 
 
-import com.providerservice.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashSet;
 
 @SpringBootApplication
 public class ProviderServiceApplication {
@@ -39,13 +31,13 @@ public class ProviderServiceApplication {
     @Bean
     CommandLineRunner run(UserService userService) {
         return args -> {
-            userService.saveRole(new Role(0, "CLIENT"));
-            userService.saveRole(new Role(0, "MANAGER"));
-            userService.saveRole(new Role(0, "ADMIN"));
+            userService.saveRole(new Role(0, ERole.ROLE_USER));
+            userService.saveRole(new Role(0, ERole.ROLE_MANAGER));
+            userService.saveRole(new Role(0, ERole.ROLE_ADMIN));
 
-            userService.saveUser(new User(0, "Ivan", "Cheban", "Ivan_Cheban", "+380664127412", "02121980", "ivan_cheban@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
-            userService.saveUser(new User(0, "Peter", "Filonenko", "Fill", "+380632018963", "11051981", "fill@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
-            userService.saveUser(new User(0, "Viktor", "Vitko", "Vito", "+380501024732", "22101982", "vikvit@gmail.com", true, new ArrayList<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
+            userService.saveUser(new User(0, "Ivan", "Cheban", "Ivan_Cheban", "+380664127412", "02121980", "ivan_cheban@gmail.com", true, new HashSet<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
+            userService.saveUser(new User(0, "Peter", "Filonenko", "Fill", "+380632018963", "11051981", "fill@gmail.com", true, new HashSet<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
+            userService.saveUser(new User(0, "Viktor", "Vitko", "Vito", "+380501024732", "22101982", "vikvit@gmail.com", true, new HashSet<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
 
 
             userService.addRoleToUser("Ivan_Cheban", "ADMIN");

@@ -56,12 +56,12 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                     log.error("error logging in: {}",exception.getMessage());
                     response.setHeader("error", exception.getMessage());
                     response.setStatus(HttpStatus.FORBIDDEN.value());
-                    //response.sendError(HttpStatus.FORBIDDEN.value());
-                    HashMap<String,String> error = new HashMap<>();
-                   error.put("error",exception.getMessage());
-
-                    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                    new ObjectMapper().writeValue(response.getOutputStream(),error);
+                    response.sendError(HttpStatus.FORBIDDEN.value());
+//                    HashMap<String,String> error = new HashMap<>();
+//                   error.put("error",exception.getMessage());
+//
+//                    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+//                    new ObjectMapper().writeValue(response.getOutputStream(),error);
                 }
             }
             else {

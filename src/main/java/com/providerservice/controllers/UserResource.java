@@ -2,9 +2,7 @@ package com.providerservice.controllers;
 
 import com.providerservice.model.Role;
 import com.providerservice.model.User;
-import com.providerservice.services.UserService;
 import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

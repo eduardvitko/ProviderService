@@ -6,14 +6,13 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +31,10 @@ public class User {
     private String email;
     @Column(name = "isActive")
     private boolean isActive;
-    @ManyToMany(fetch=FetchType.EAGER)
-    private Collection<Role> roles =new ArrayList<>();
+    @ManyToMany(fetch=FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+    joinColumns= @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles =new HashSet<>();
     @Column(name = "created")
     private LocalDateTime created;
     @Column(name = "updated")

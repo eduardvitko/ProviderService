@@ -1,12 +1,13 @@
 package com.providerservice.repositories;
 
+import com.providerservice.model.ERole;
 import com.providerservice.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
+import java.util.Optional;
 
 @Repository
-public interface RoleRepositories extends JpaRepository<Role, Integer> {
-    Role findByName(String name);
+public interface RoleRepository extends JpaRepository<Role, Integer> {
+   Optional <Role> findByName(ERole name);
 }
