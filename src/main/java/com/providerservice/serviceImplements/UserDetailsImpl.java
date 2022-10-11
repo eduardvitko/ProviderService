@@ -21,30 +21,28 @@ public class UserDetailsImpl implements UserDetails {
     private String email;
 
     @JsonIgnore
-    private String firstName;
-    private String lastName;
-    private String phone;
+
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-    private boolean isActive;
-    private LocalDateTime created;
-    private LocalDateTime updated;
-    private  int balance;
+//    private boolean isActive;
+//    private LocalDateTime created;
+//    private LocalDateTime updated;
+//    private  int balance;
 
-    public UserDetailsImpl(int id,String firstName,String lastName, String username, String phone,String email, boolean isActive, String password,
-                           Collection<? extends GrantedAuthority> authorities,LocalDateTime created,LocalDateTime updated,int balance) {
+    public UserDetailsImpl(int id, String username, String email, String password,
+                           Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
         this.username = username;
-        this.phone = phone;
+        //this.phone = phone;
         this.email = email;
-        this.isActive = isActive;
+       // this.isActive = isActive;
         this.password = password;
         this.authorities = authorities;
-        this.created =created;
-        this.updated = updated;
-        this.balance = balance;
+       // this.created =created;
+        //this.updated = updated;
+       // this.balance = balance;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -54,17 +52,17 @@ public class UserDetailsImpl implements UserDetails {
 
         return new UserDetailsImpl(
                 user.getId(),
-                user.getFirstName(),
-                user.getLastName(),
+               // user.getFirstName(),
+               // user.getLastName(),
                 user.getUsername(),
-                user.getPhone(),
+               // user.getPhone(),
                 user.getEmail(),
-                user.isActive(),
+               // user.isActive(),
                 user.getPassword(),
-                authorities,
-                user.getCreated(),
-                user.getUpdated(),
-                user.getBalance());
+                authorities);
+               // user.getCreated(),
+               // user.getUpdated(),
+               // user.getBalance());
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
