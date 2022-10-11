@@ -28,25 +28,8 @@ public class ProviderServiceApplication {
 
     }
 
-    @Bean
-    CommandLineRunner run(UserService userService) {
-        return args -> {
-            userService.saveRole(new Role(0, ERole.ROLE_USER));
-            userService.saveRole(new Role(0, ERole.ROLE_MANAGER));
-            userService.saveRole(new Role(0, ERole.ROLE_ADMIN));
-
-            userService.saveUser(new User(0, "Ivan", "Cheban", "Ivan_Cheban", "+380664127412", "02121980", "ivan_cheban@gmail.com", true, new HashSet<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
-            userService.saveUser(new User(0, "Peter", "Filonenko", "Fill", "+380632018963", "11051981", "fill@gmail.com", true, new HashSet<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
-            userService.saveUser(new User(0, "Viktor", "Vitko", "Vito", "+380501024732", "22101982", "vikvit@gmail.com", true, new HashSet<>(), LocalDateTime.now(), LocalDateTime.now(), 0));
 
 
-            userService.addRoleToUser("Ivan_Cheban", "ADMIN");
-            userService.addRoleToUser("Fill", "MANAGER");
-            userService.addRoleToUser("Vito", "CLIENT");
-
-
-        };
-    }
 
 
     //    @Bean
@@ -65,10 +48,10 @@ public class ProviderServiceApplication {
 //        return new CorsFilter(urlBasedCorsConfigurationSource);
 //    }
 //
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-   }
+//    @Bean
+//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//        return new BCryptPasswordEncoder();
+//   }
 }
 
 
