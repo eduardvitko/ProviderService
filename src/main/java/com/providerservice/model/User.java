@@ -16,15 +16,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique = true, nullable = false, updatable = false)
+
     private String firstName;
-    @Column(unique = true, nullable = false, updatable = false)
+
     private String lastName;
+
     @Column(unique = true, nullable = false, updatable = false)
     private String username;
-    @Column(unique = true, nullable = false, updatable = false)
+   // @Column(unique = true, nullable = false, updatable = false)
     private String phone;
-    @Column(unique = true, nullable = false, updatable = false)
+
     private String password;
     @Column(unique = true, nullable = false, updatable = false)
     private String email;
@@ -40,6 +41,9 @@ public class User {
     private LocalDateTime updated;
     @Column(name = "balance")
     private int balance;
+
+    public User() {
+    }
 
     public User(String username, String email, String password) {
         this.username = username;
